@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
     /**
-     * Show the profile for the given user.
+     * Show the home page.
      *
-     * @param  int  $id
-     * @return Response
+     * 
      */
     public function __invoke()
     {
-        return view('welcome');
+        $posts = Post::all();
+        //KLJUČ, ne var 'posts' postaje var u view
+        return view('home', ['posts' => $posts]);
     }
 }
