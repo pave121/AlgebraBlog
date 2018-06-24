@@ -22,7 +22,7 @@ class Post extends Model
     *
     * @param array $data
     * @return object Post -- da ne moramo 2 zahtjeva bazi slati, odmah ga imamo
-    *
+    * 
     */
     public function savePost($data = array())
     {

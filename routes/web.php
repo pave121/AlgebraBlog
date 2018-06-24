@@ -39,6 +39,9 @@ Route::resource('users', 'UserController');
 // Roles
 Route::resource('roles', 'RoleController');
 
+// Posts
+Route::resource('posts', 'PostController');
+
 // Dashboard
 Route::get('dashboard', 'DashboardController')->name('dashboard');
 
