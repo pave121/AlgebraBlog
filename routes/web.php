@@ -11,7 +11,7 @@
 |
 */
 // 2 parametra URI , action
-Route::get('/', 'HomeController');
+
 
 // Authorization
 Route::get('login', 'Auth\SessionController@getLogin')->name('auth.login.form');
@@ -45,3 +45,8 @@ Route::resource('posts', 'PostController');
 // Dashboard
 Route::get('dashboard', 'DashboardController')->name('dashboard');
 
+//Home page
+Route::get('/', 'HomeController');
+
+//Single post
+Route::get('/{slug}', 'HomeController@showPost')->name('home.post.show');
