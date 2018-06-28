@@ -6,6 +6,7 @@ Algebra Blog
 
 
 @section('content')
+ 
     @if($posts->count() > 0)
         <div class="row">
             @foreach($posts as $post)

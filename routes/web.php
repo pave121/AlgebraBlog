@@ -48,5 +48,10 @@ Route::get('dashboard', 'DashboardController')->name('dashboard');
 //Home page
 Route::get('/', 'HomeController');
 
+//Show posts on user page
+
+
+
 //Single post
 Route::get('/{slug}', 'HomeController@showPost')->name('home.post.show');
+

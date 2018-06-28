@@ -1,0 +1,14 @@
+1.) izlistati postove kod prijave
+(boostrap table)
+    -naslov posta, autor datum....
+    -naslov vodi k pojedinačnom postu
+    
+-dodaj edit, delete gumbe
+
+admin:
+    -vidi sve postovi
+user:
+    -samo njegovi postovi
+    
+dohvati user u controller
+upit u bazi od samo tog korisnika

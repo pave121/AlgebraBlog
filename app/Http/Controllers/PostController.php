@@ -24,7 +24,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        $user_id = Sentinel::getUser()->id;
+        if(Sentinel::getUser()->inRole('administrator')){
+            $posts = Post::all();
+        }
+        else{
+        $posts = Post::where('user_id', $user_id)->get();
+        }
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -77,7 +84,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
