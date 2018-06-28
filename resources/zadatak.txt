@@ -1,14 +1,34 @@
-1.) izlistati postove kod prijave
-(boostrap table)
-    -naslov posta, autor datum....
-    -naslov vodi k pojedinačnom postu
-    
--dodaj edit, delete gumbe
+samo vlastite postove može edit
+osim admina, on može sve
 
-admin:
-    -vidi sve postovi
-user:
-    -samo njegovi postovi
+update, edit, destroy metode u postcontroller
+
+
+--implementirati komentare
+    samo za logirane korisnike
+    izlistati komentare
     
-dohvati user u controller
-upit u bazi od samo tog korisnika
+--za admin page all posts
+    --vidjeti sve komentare
+    
+    nova tablica u bazi (comments)
+        -id
+        -title
+        -content
+        -user_id
+        -post_id
+        
+    ->migracija
+    ->model (comment)
+        -C/P post modela
+    ->relacije
+        -prema korisniku
+        -prema postu
+        
+        
+    na modelu nova relacija
+    
+    post.blade ->provjera je li  ulogiran
+                ->kućica za komentare
+                
+    resource kontroller za komentare (za admina)

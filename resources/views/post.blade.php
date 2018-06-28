@@ -17,4 +17,18 @@ Algebra Blog | {{ $post->title }}
             {{ $post->content }}
         </div>
     </div>
+    <div class="row" style="margin-top:50px">
+        <div class="col-sm-12">
+            @if(Sentinel::check())
+                prikazi formular za komentare
+            @else
+                prikazi login
+            @endif
+        </div>
+    </div>
+    <div class="row" style="margin-top:50px">
+        <div class="col-sm-12">
+            ispis svih komentara $post->comment
+        </div>
+    </div>
 @endsection

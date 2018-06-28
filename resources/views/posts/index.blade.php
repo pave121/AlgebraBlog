@@ -23,26 +23,44 @@ Algebra Blog | All Posts
         </h1>
         
       <div class="row" style="margin-top:20px">
-            @foreach($posts as $post)
-              
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                      <img src="http://via.placeholder.com/600x300" class="img-fluid" />
-                          <div class="caption">
-                           <h4>Author: {{ $post->user->email }}</h4>
-                           <h5>Published: {{ \Carbon\Carbon::createFromTimestamp(strtotime($post->created_at))->diffForHumans() }}</h5>
-                            <h3>{{ $post->title }}</h3>
-                            <p>{{ str_limit($post->content, 150) }}</p>
-                            <p><a href="{{ route('home.post.show', $post->slug) }}" class="btn btn-primary" role="button">Read More</a>
-                            <a href="{{ route('home.post.show', $post->slug) }}" class="btn btn-danger pull-right" role="button">Delete</a>
-                            <a href="{{ route('home.post.show', $post->slug) }}" class="btn btn-warning pull-right" style="margin-right:5px" role="button">Edit</a>
-                              </p>
-                          </div>
-                     </div>
-                  </div>
-                  
-            @endforeach
-            
+           <div class="col-sm-12">
+             @if($posts->count() > 0)
+              <div class="table-responsive">
+                   <table class="table table-hover">
+                       <thead>
+                           <tr>
+                               <th>#</th>
+                               <th>Title</th>
+                               <th>Author</th>
+                               <th>Published</th>
+                               <th>Actions</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach($posts as $post)
+                               <tr>
+                               <td>{{ $post->id }}</td>
+                               <td>
+                                   <a href="{{ route('home.post.show', $post->slug) }}" target="_blank">
+                                       {{ $post->title }}
+                                   </a>
+                               </td>
+                               <td>{{ $post->user->email }}</td>
+                               <td>{{ date('d.m.Y H:i', strtotime($post->created_at)) }}</td>
+                               <td>
+                                   <a href="{{ route('posts.edit', $post->id) }}" " class="btn btn-primary">Edit</a>
+                                   <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">Delete</a>
+                               </td>
+                           </tr>
+                           @endforeach
+                       </tbody>
+                   </table>
+              </div>
+              {{ $posts->links() }}
+              @else
+                  <h1>Trenutno nema objava!</h1>
+           </div>
+            @endif
         </div>
    
 @endsection

@@ -17,7 +17,7 @@
 *  - Adding the Session::token to 'data-token' will add a hidden input for needed for CSRF.
 */
 
-$(function() {
+$(document).ready(function() {
   $('[data-method]').not(".disabled").append(function() {
       var methodForm = "\n";
       methodForm += "<form action='" + $(this).attr('href') + "' method='POST' style='display:none'>\n";
@@ -25,9 +25,33 @@ $(function() {
       if ($(this).attr('data-token')) {
         methodForm += "<input type='hidden' name='_token' value='" + $(this).attr('data-token') + "'>\n";
       }
+      if ($(this).attr('data-status')) {
+        methodForm += "<input type='hidden' name='status' value='" + $(this).attr('data-status') + "'>\n";
+      }
       methodForm += "</form>\n";
       return methodForm;
     })
     .removeAttr('href')
-    .attr('onclick', ' if ($(this).hasClass(\'action_confirm\')) { if(confirm($(this).data(\'message\') || "Are you sure you want to do this?")) { $(this).find("form").submit(); } } else { $(this).find("form").submit(); }');
+    .on('click', function(){
+        var form = $(this).find('form');
+        if($(this).hasClass('action_confirm')){
+            swal({
+              title: "Are you sure?",
+              text: "Your will not be able to recover this action!",
+              type: "error",
+              showCancelButton: true,
+              confirmButtonClass: "btn-danger",
+              confirmButtonText: "Yes, I'm sure!",
+              closeOnConfirm: true
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    form.submit();
+                }
+            });
+        } else {
+            form.submit();
+        }
+
+    });
 });

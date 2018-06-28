@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __invoke()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(2);
         //KLJUČ, ne var 'posts' postaje var u view
         return view('home', ['posts' => $posts]);
     }

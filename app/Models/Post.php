@@ -59,4 +59,14 @@ class Post extends Model
     {   //model user komunicira s bazom
         return $this->belongsTo('App\Models\User');
     }
+    
+     /**
+     * return post relationship
+     *
+     * 
+     */
+    public function comment()
+    {   //model user komunicira s bazom
+        return $this->hasMany('App\Models\Comment');
+    }
 }

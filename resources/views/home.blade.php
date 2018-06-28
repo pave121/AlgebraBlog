@@ -22,6 +22,9 @@ Algebra Blog
                   </div>
             @endforeach
         </div>
+        <div class="row">
+            {{ $posts->links() }}
+        </div>
     @else
         <h1>Trenutno nema objava!</h1>
     @endif
