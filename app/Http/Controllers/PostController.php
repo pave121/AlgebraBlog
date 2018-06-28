@@ -29,7 +29,7 @@ class PostController extends Controller
             $posts = Post::all();
         }
         else{
-        $posts = Post::where('user_id', $user_id)->get();
+            $posts = Post::where('user_id', $user_id)->get();
         }
         return view('posts.index', ['posts' => $posts]);
     }
