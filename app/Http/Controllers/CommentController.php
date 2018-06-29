@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Sentinel;
 use Exception;
+use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,29 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData=$request->validate([
+            'commentTitle' => 'required|max:255',
+            'commentContent' => 'required',
+        ]);
+        $user_id = Sentinel::getUser()->id;  
+        $post_id = $request['postId'];
+        $data = array(
+            'title' =>trim($request->get('commentTitle')),
+            'content' =>trim($request->get('commentContent')),
+            'user_id' => $user_id,
+            'post_id' => $post_id
+        );
+        
+        $comment = new Comment;
+        try{
+            $comment_id = $comment->SaveComment($data)->id;
+            } catch (Exception $e) {
+                session()->flash('error', $e->getMessage());
+            return redirect()->back();
+        }
+        
+        session()->flash('success', 'You have successfully added a new comment!');
+        return redirect()->back();
     }
 
     /**
