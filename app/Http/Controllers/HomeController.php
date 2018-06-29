@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Comment;
 
 class HomeController extends Controller
 {
@@ -26,8 +27,8 @@ class HomeController extends Controller
     public function showPost($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-        
-        return view('post', ['post' => $post]);
+        $comments = Comment::where('post_id', $post['id'])->paginate(20);
+        return view('post', ['post' => $post, 'comments' => $comments]);
     }
    
 }

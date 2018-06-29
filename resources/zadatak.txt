@@ -32,3 +32,4 @@ update, edit, destroy metode u postcontroller
                 ->kućica za komentare
                 
     resource kontroller za komentare (za admina)
+    

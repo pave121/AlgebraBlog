@@ -2,20 +2,11 @@
 
 namespace App\Models;
 
-//use van klase je za servis
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class Comment extends Model
 {
-    //koristi trait Sluggable
-    use Sluggable;
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['title', 'content', 'user_id'];
+     protected $fillable = ['title', 'content', 'user_id', 'post_id'];
     
     /**
     * save new post 
@@ -24,7 +15,7 @@ class Post extends Model
     * @return object Post -- da ne moramo 2 zahtjeva bazi slati, odmah ga imamo
     * 
     */
-    public function savePost($data = array())
+    public function saveComment($data = array())
     {
         return $this->create($data);
     }
@@ -37,19 +28,11 @@ class Post extends Model
     *
     */
     
-    public function updatePost($data)
+    public function updateComment($data)
     {
         $this->update($data);
     }
     
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
      /**
      * return user relationship
      *
@@ -61,12 +44,12 @@ class Post extends Model
     }
     
      /**
-     * return comment relationship
+     * return post relationship
      *
      * 
      */
-    public function comment()
+    public function post()
     {   
-        return $this->hasMany('App\Models\Comment');
+        return $this->belongsTo('App\Models\Post');
     }
 }

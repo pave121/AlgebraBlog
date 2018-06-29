@@ -16,5 +16,15 @@ class User extends EloquentUser
         return $this->hasMany('App\Models\Post');
     }
     
+    /**
+     * Return the comments relationship
+     *
+     * 
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+    
     
 }
