@@ -1,35 +1,32 @@
-samo vlastite postove može edit
-osim admina, on može sve
+samo vlastite postove može edit  ++
+osim admina, on može sve        ++
 
 update, edit, destroy metode u postcontroller
 
-
---implementirati komentare
+--implementirati komentare      ++
     samo za logirane korisnike
     izlistati komentare
     
---za admin page all posts
-    --vidjeti sve komentare
-    
-    nova tablica u bazi (comments)
-        -id
+    nova tablica u bazi (comments)  ++
+        -id                 
         -title
         -content
         -user_id
         -post_id
         
-    ->migracija
-    ->model (comment)
-        -C/P post modela
-    ->relacije
+    ->migracija         ++
+    ->model (comment)       ++
+        -C/P post modela    ++
+    ->relacije              ++
         -prema korisniku
         -prema postu
         
-        
-    na modelu nova relacija
+    na modelu nova relacija  ++
     
-    post.blade ->provjera je li  ulogiran
+    post.blade ->provjera je li  ulogiran   ++
                 ->kućica za komentare
-                
-    resource kontroller za komentare (za admina)
+        
+--za admin page all posts       --
+    --vidjeti sve komentare
     
+resource kontroller za komentare (za admina)  --

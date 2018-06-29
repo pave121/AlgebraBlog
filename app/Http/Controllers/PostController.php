@@ -96,8 +96,15 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        
-        return view('posts.edit', ['post' => $post]);
+        if(Sentinel::getUser()->inRole('administrator')){
+            return view('posts.edit', ['post' => $post]);
+        }
+        else{
+            if(Sentinel::getUser()->id == $post->user->id)
+                return view('posts.edit', ['post' => $post]);
+            else
+                abort(404);
+        }
     }
 
     /**
