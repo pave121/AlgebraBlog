@@ -5,8 +5,7 @@ Algebra Blog | All Posts
 @endsection
 
 
-@section('content')
-  
+@section('content')  
     <div class="page-header">
         <div class='btn-toolbar pull-right'>
             <a class="btn btn-primary btn-lg" href="{{ route('posts.create') }}">
@@ -38,7 +37,7 @@ Algebra Blog | All Posts
                        </thead>
                        <tbody>
                            @foreach($posts as $post)
-                               <tr>
+                               <tr style="background-color: aliceblue">
                                <td>{{ $post->id }}</td>
                                <td>
                                    <a href="{{ route('home.post.show', $post->slug) }}" target="_blank">
@@ -52,6 +51,21 @@ Algebra Blog | All Posts
                                    <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">Delete</a>
                                </td>
                            </tr>
+                           <tr>
+                               <td colspan="5"><h4>Komentari:</h4></td>
+                           </tr>
+                           @foreach ($post->comment as $comment)
+                               <tr style="padding-left:10%; border:none;">
+                                   <td></td>
+                                   <td><b>{{ $comment->title }}</b></td>
+                                   <td colspan="2">{{ $comment->user->email }}</td>
+                                   <td><a href="{{ route('comments.destroy', $comment->id) }}" class="btn btn-danger action_confirm" data-method="delete" data-token="{{ csrf_token() }}">Delete Comment</a></td>
+                               </tr>
+                               <tr style="padding-left:10%">
+                                  <td></td>
+                                   <td colspan="5">{{ $comment->content }}</td>
+                               </tr>
+                               @endforeach
                            @endforeach
                        </tbody>
                    </table>
@@ -65,3 +79,4 @@ Algebra Blog | All Posts
    
 @endsection
     </div>
+    

@@ -110,6 +110,16 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        
+        try{
+            $comment->delete();
+        }catch (Exception $e) {
+                session()->flash('error', $e->getMessage());
+            return redirect()->back();
     }
+        session()->flash('success', 'You have successfully deleted a comment!');
+        return redirect()->back();
+    }
+    
 }
